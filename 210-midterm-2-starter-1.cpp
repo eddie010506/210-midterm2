@@ -97,8 +97,8 @@ public:
         for (int i = 1; i < pos; i++){// changed the function to move to the next one
             temp = temp->next;
             if (!temp) {
-                cout << "Position doesn't exist." << endl;
-                return;
+                
+                return "";
             }
         }
         string name = temp->data;//now temp is the node that will be deleted    
@@ -183,7 +183,7 @@ public:
             return;
         }
         while (current) {
-            cout << current->data << " ";
+            cout << "    "<<current->data << endl;
             current = current->next;
         }
         cout << endl;
@@ -196,7 +196,7 @@ public:
             return;
         }
         while (current) {
-            cout << current->data << " ";
+            cout << current->data << endl;
             current = current->prev;
         }
         cout << endl;
@@ -284,9 +284,27 @@ int main() {
             cout << vipCustomer << " (VIP) joins the front of the line" << endl;
             line.push_front(vipCustomer);
         }
+        //event 5 random customer leaves line by 10 percent chance
         if (!line.isEmpty() && (rand() % 100 < 10)){
-            
+            int lineSize = line.getSize();
+        
+            if (lineSize > 0) {//linesize has to be bigger than 0
+                // pick a random position in the line 
+                int randomPos = (rand() % lineSize) + 1;
+
+                // calling the function and getting the returned name
+                string removedCustomer = line.delete_pos(randomPos);
+
+                // check that a valid name was returned before printing
+                if (!removedCustomer.empty()) {
+                    cout << removedCustomer << " left the line" << endl;
+                }
+            }
         }
+        cout << "Resulting line:"<< endl;
+        line.print();
+        cout << "-------------------------" << endl;
+        
 
     }
     return 0;
