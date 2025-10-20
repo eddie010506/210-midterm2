@@ -209,7 +209,28 @@ public:
     bool isEmpty(){ // checking if list empty
         return head == nullptr;
     }
-    int getSize()
+    int getSize(){// getting the number of node on the list
+        int count = 0;
+        Node* temp = head;
+        while (temp!=nullptr){
+            count++;
+            temp = temp->next;
+        }
+        return count;
+
+    }
+    string getFront(){
+        if (!isEmpty()){
+            return head->data;
+        }
+        return "";// returning empty if the list is empty
+    }
+    string getBack(){
+        if (!isEmpty()){
+            return tail->data;
+        }
+        return "";// returning empty if the list is empty
+    }
 };
 
 int main() {
