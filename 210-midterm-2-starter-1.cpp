@@ -265,7 +265,30 @@ int main() {
     cout << "-------------------------" << endl;
 
     for (int i =1; i<=20; ++i){
-        
+        cout << "Time step#"<< i << ":"<< endl;
+
+        //event 1 customer is served by 40% chance
+        if (!line.isEmpty() && (rand() % 100 < 40)) {
+            cout << line.getFront() << " is served" << endl;
+            line.pop_front();
+        }
+        // event 2 new customer joins the line by 60% chance
+        if (rand() % 100 < 60) {
+            string newCustomer = getRandomName(names);
+            cout << newCustomer << " joins the line" << endl;
+            line.push_back(newCustomer);
+        }
+        //event 3 the last customer leaves by 20% chance
+        if (!line.isEmpty() && (rand() % 100 < 20)) {
+            cout << line.getBack() << " (at the rear) left the line" << endl;
+            line.pop_back();
+        }
+        //event 4 VIP customer joins the front by 10% chance
+        if (rand() % 100 < 10) {
+            string vipCustomer = getRandomName(names);
+            cout << vipCustomer << " (VIP) joins the front of the line" << endl;
+            line.push_front(vipCustomer);
+        }
     }
     return 0;
 }
