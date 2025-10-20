@@ -232,9 +232,24 @@ public:
         return "";// returning empty if the list is empty
     }
 };
-
+string getRandonName(const vector<string>& names){// function for getting random names
+    if (names.empty()) {
+        return "DefaultName";
+    }
+    int randomIndex = rand() % names.size();
+    return names[randomIndex];
+}
 int main() {
-    cout << MIN_NR + MIN_LS + MAX_NR + MAX_LS;  // dummy statement to avoid compiler warning
+    srand(time(nullptr));//getting random seed
+    vector<string> names;//getting file
+    ifstream nameFile("names.txt");
+    string name;
+
+    // getting each name from the file into the vector
+    while (getline(nameFile, name)) {
+        names.push_back(name);
+    }
+    nameFile.close();
 
     
     return 0;
