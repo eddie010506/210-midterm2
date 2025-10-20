@@ -232,7 +232,7 @@ public:
         return "";// returning empty if the list is empty
     }
 };
-string getRandonName(const vector<string>& names){// function for getting random names
+string getRandomName(const vector<string>& names){// function for getting random names
     if (names.empty()) {
         return "DefaultName";
     }
@@ -251,6 +251,21 @@ int main() {
     }
     nameFile.close();
 
-    
+    DoublyLinkedList line;
+
+    cout << "store opens:"<<endl;
+
+    for (int i = 0; i < 5; ++i) {
+        string newCustomer = getRandomName(names);
+        cout << newCustomer << " joins the line" << endl;
+        line.push_back(newCustomer);
+    }
+    cout << "Resulting line:" << endl;
+    line.print();
+    cout << "-------------------------" << endl;
+
+    for (int i =1; i<=20; ++i){
+        
+    }
     return 0;
 }
