@@ -81,41 +81,36 @@ public:
         delete temp;
     }
 
-    void delete_pos(int pos) {
-        if (!head) {
-            cout << "List is empty." << endl;
-            return;
+    string delete_pos(int pos) {
+        if (!head || pos<1) {
+            return ""; // returning empty string to show failure
         }
     
-        if (pos == 1) {
+        if (pos == 1) {// getting name 
+            string name = head->data;
             pop_front();
-            return;
+            return name;
         }
     
         Node* temp = head;
     
-        for (int i = 1; i < pos; i++){
+        for (int i = 1; i < pos; i++){// changed the function to move to the next one
+            temp = temp->next;
             if (!temp) {
                 cout << "Position doesn't exist." << endl;
                 return;
             }
-            else
-                temp = temp->next;
         }
-        if (!temp) {
-            cout << "Position doesn't exist." << endl;
-            return;
-        }
-    
-        if (!temp->next) {
+        string name = temp->data;//now temp is the node that will be deleted    
+        if (temp == tail){//used when the node is tail
             pop_back();
-            return;
         }
-    
-        Node* tempPrev = temp->prev;
-        tempPrev->next = temp->next;
-        temp->next->prev = tempPrev;
-        delete temp;
+        else{// if the node is in the middle
+            temp->prev->next = temp->next;
+            temp->next->prev = temp->prev;
+            delete temp;
+        }
+        return name;//returning the name
     }
 
     void push_back(string v) {
@@ -289,6 +284,10 @@ int main() {
             cout << vipCustomer << " (VIP) joins the front of the line" << endl;
             line.push_front(vipCustomer);
         }
+        if (!line.isEmpty() && (rand() % 100 < 10)){
+            
+        }
+
     }
     return 0;
 }
